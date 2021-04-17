@@ -50,18 +50,45 @@ ScreenManager:
                     
                 Label:
                     text: 'How many Weeks/Months do you want to pay for'
-                    size_hint: (.5,.1)
+                    size_hint: (.7,.1)
                 Spinner:
                     id: weeks_months
-                    values: 'Week(s)', 'Month(s), Year(s)'
+                    values: 'weeks', 'month', 'year'
                     size_hint: (.5,.1)
         
                 Label:
-                    text: 'Name of Vacation'
+                    text: 'For how long'
                     size_hint: (.5,.1)
                 TextInput:
-                    id: name
+                    id: length
                     size_hint: (.5,.1)
+            BoxLayout:
+                orientation: 'vertical'
+                Label:
+                    text: 'Your Salary'
+                    size_hint: (.5,.1)
+        
+                TextInput:
+                    id: salary
+                    size_hint: (.5,.1)
+                    
+                Label:
+                    text: 'Total cost of Vacation'
+                    size_hint: (.5,.1)
+        
+                TextInput:
+                    id: total_cost
+                    size_hint: (.5,.1)
+                    
+                Label:
+                    text: 'Save'
+                    size_hint: (.5,.1)
+                
+                Button:
+                    text: 'Save'
+                    size_hint: (.5,.1)
+                    pos_hint: {'top': .1}
+                    on_press: root.update_variables()
                
         
 """
@@ -72,7 +99,11 @@ class Home(Screen):
 
 
 class Vacation(Screen):
-    pass
+    def update_variables(self):
+        app.salary = int(self.ids.salary.text)
+        app.total_cost = int(self.ids.total_cost.text)
+        app.weeks_months_years = self.ids.weeks_months.text
+        app.length_of_payments = int(self.ids.length.text)
 
 
 manage = ScreenManager()
@@ -85,7 +116,6 @@ class Budget(App):
     total_cost = NumericProperty()
     weeks_months_years = StringProperty()
     length_of_payments = NumericProperty()
-
 
     def build(self):
         screen = Builder.load_string(screen_manager)
