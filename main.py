@@ -1,13 +1,13 @@
 from kivy.app import App
 from kivy.lang import Builder
+from kivy.properties import NumericProperty, StringProperty
 from kivy.uix.screenmanager import ScreenManager, Screen
 
 screen_manager = """
-
-
 ScreenManager:
     Home:
     Vacation:
+    
     
 <Home>:
     name: 'home'
@@ -29,7 +29,41 @@ ScreenManager:
     
 <Vacation>:
     name: 'vacation'
-    
+    BoxLayout:
+        orientation: 'vertical'
+        Button:
+            size_hint: (.1,.1)
+            pos_hint: {'x': 0, 'top': .1}
+            text: '<'
+            font_size: 30
+            on_press: root.manager.current = 'home'
+        BoxLayout:
+            BoxLayout:
+                orientation: 'vertical'
+                Label:
+                    text: 'Name of Vacation'
+                    size_hint: (.5,.1)
+        
+                TextInput:
+                    id: name
+                    size_hint: (.5,.1)
+                    
+                Label:
+                    text: 'How many Weeks/Months do you want to pay for'
+                    size_hint: (.5,.1)
+                Spinner:
+                    id: weeks_months
+                    values: 'Week(s)', 'Month(s), Year(s)'
+                    size_hint: (.5,.1)
+        
+                Label:
+                    text: 'Name of Vacation'
+                    size_hint: (.5,.1)
+                TextInput:
+                    id: name
+                    size_hint: (.5,.1)
+               
+        
 """
 
 
@@ -47,6 +81,12 @@ manage.add_widget(Vacation(name='vacation'))
 
 
 class Budget(App):
+    salary = NumericProperty()
+    total_cost = NumericProperty()
+    weeks_months_years = StringProperty()
+    length_of_payments = NumericProperty()
+
+
     def build(self):
         screen = Builder.load_string(screen_manager)
         return screen
