@@ -155,12 +155,17 @@ ScreenManager:
                     text: 'Click to Get Report'
                     size_hint: (.5,.1)
                     pos_hint: {'top': .1}
+                    on_press: root.get_weekly_payment()
+                    on_press: root.get_monthly_payment()
+                    on_press: root.yearly_payments()
+                    on_press: root.get_salary_percentage()
                     on_press: root.update_variables()
                     on_press: root.manager.current = 'report'
                
         
 <Report>:
     name: 'report'
+    
     BoxLayout:
         orientation: 'vertical'
         BoxLayout:
@@ -169,7 +174,7 @@ ScreenManager:
                 text: 'Weekly Payment:'
                 size_hint: (.5,.1)
             Label:
-                text: 'app.weekly_payment'
+                text: app.weekly_payments
                 size_hint: (.5,.1)
         BoxLayout:
             orientation: 'horizontal'
@@ -177,7 +182,7 @@ ScreenManager:
                 text: 'Monthly Payment:'
                 size_hint: (.5,.1)
             Label:
-                text: 'app.monthly_payment'
+                text: app.monthly_payments
                 size_hint: (.5,.1)
         BoxLayout:
             orientation: 'horizontal'
@@ -185,7 +190,7 @@ ScreenManager:
                 text: 'Yearly Payment:'
                 size_hint: (.5,.1)
             Label:
-                text: 'app.yearly_payment'
+                text: app.yearly_payments
                 size_hint: (.5,.1)
         BoxLayout:
             orientation: 'horizontal'
@@ -193,7 +198,7 @@ ScreenManager:
                 text: 'Percentage of Salary:'
                 size_hint: (.5,.1)
             Label:
-                text: 'app.salary_percentage'
+                text: app.salary_percentage
                 size_hint: (.5,.1)
     
     
